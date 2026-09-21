@@ -1,4 +1,5 @@
 import axios from 'axios';
+import SeriesList from '@components/SeriesList';
 
 export default async function GetPage() {
     let series;
@@ -19,11 +20,7 @@ export default async function GetPage() {
             <p> DevTools - Network: essa chamada nem apaece lá, pois ela acontece no servidor. </p>
             <p> Axios.get direto na API e salva SessionStorage, 
             mas rodando no servidor, a api-key nunca chega no navegador.</p>
-            <ul>
-                {series.map((item) => (
-                    <li key={item.id}>{item.title}</li>
-                ))}
-            </ul>
+            <SeriesList series={series} />
         </main>
     );
 }

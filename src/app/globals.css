@@ -8,7 +8,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(to bottom right, aliceblue, lightskyblue);
+    background: linear-gradient(to bottom right, rgb(221, 166, 243), lightskyblue);
 }
 
 main {

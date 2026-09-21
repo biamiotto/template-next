@@ -18,7 +18,7 @@ export default function ApiKeyPage() {
             headers: { "x-api-key": process.env.NEXT_PUBLIC_API_KEY },
           },
         );
-        toast.success("Séries carregadas !", { id: "getApiKey" });
+        toast.success("Séries carregadas!", { id: "getApiKey" });
         setSeries(resp.data.data);
       } catch {
         toast.error("Erro ao buscar as séries.", { id: "getApiKey" });
