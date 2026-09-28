@@ -32,8 +32,8 @@ export default async function Page() {
         </main>
         <footer className={styles.footer}>
             <p>Codeverse &copy; {new Date().getFullYear()}</p>
-            <p>Next.js - Axios - Ant Design - Lucide React</p>
+            <p>Next.js - Axios - Ant Design - Lucide</p>
         </footer>
         </>
-    )
+    );
 }
