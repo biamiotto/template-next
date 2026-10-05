@@ -11,14 +11,30 @@ export default function CreatePage() {
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (values) => {
+        console.log('Dados enviados:', values);
+
         setLoading(true);
+
         try {
-            await axios.post('/api/series', values);
+            const response = await axios.post('/api/series', values);
+
+            console.log('Resposta da API:', response.data);
+
             setOpenModal(false);
+
             toast.success('Série criada!', { id: 'create' });
         } catch (error) {
-            toast.error('Erro ao criar a série', { id: 'create' });
-            console.error(error);
+            console.error('Erro ao criar a série:', error);
+
+            if (error.response) {
+                console.error('Status:', error.response.status);
+                console.error('Resposta:', error.response.data);
+            }
+
+            toast.error(
+                error.response?.data?.error || 'Erro ao criar a série',
+                { id: 'create' }
+            );
         } finally {
             setLoading(false);
         }
@@ -27,12 +43,16 @@ export default function CreatePage() {
     return (
         <main>
             <h2>Post - Create</h2>
+
             <p>
                 O navegador envia o formulário (modal) para /api/series (nosso route.js); o servidor
                 cria a série na API com a api-key privada.
             </p>
-            <p>Abra o DevTools → Network → series → Payload: 
-            os dados enviados, sem x-api-key.</p>
+
+            <p>
+                Abra o DevTools → Network → series → Payload:
+                os dados enviados, sem x-api-key.
+            </p>
 
             <Button
                 type='primary'
@@ -47,17 +67,17 @@ export default function CreatePage() {
                 }}
                 onMouseLeave={(e) => {
                     e.currentTarget.style.backgroundColor = '#621092';
-                    e.currentTarget.style.borderColor = '#621092';;
+                    e.currentTarget.style.borderColor = '#621092';
                 }}
             >
-            Nova série
+                Nova série
             </Button>
 
             <FormModal
-            openModal={openModal}
-            confirmLoaading={loading}
-            onSubmit={handleSubmit}
-            onCancel={ () => setOpenModal(false)}
+                openModal={openModal}
+                confirmLoading={loading}
+                onSubmit={handleSubmit}
+                onCancel={() => setOpenModal(false)}
             />
         </main>
     );
